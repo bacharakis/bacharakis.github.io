@@ -1,0 +1,45 @@
+---
+layout: post
+title: Different RSS feeds in the same Wordpress blog
+date: 2012-11-29 19:32:44.000000000 +02:00
+type: post
+published: true
+status: publish
+categories:
+- Blog
+tags:
+- blog
+- categories
+- category
+- different
+- feeds
+- Mozilla
+- rss
+- tags
+- wordpress
+meta:
+  _edit_last: '1'
+  _designfolio_column_layout: default
+  _designfolio_hide_title_header_tag: ''
+  _designfolio_column_layout_save: ''
+  _designfolio_portfolio_group: ''
+  _designfolio_portfolio_columns: ''
+author:
+  login: bacharakis
+  email: cmpahar@gmail.com
+  display_name: bacharakis
+  first_name: ''
+  last_name: ''
+---
+<p>Recently I joined the <a href="http://reps.mozilla.org">Mozilla Reps</a> program where there is <a href="http://planet.mozillareps.org/">http://planet.mozillareps.org/</a> which an aggregator for all Mozilla Rep's blogs.</p>
+<p>In addition as a <a href="http://join.fedoraproject.org">Fedora Contributor</a> my blog posts show up in the <a href="http://planet.fedoraproject.org">http://planet.fedoraproject.org</a> which is a Fedora contributor's aggregator as well.</p>
+<p><img class="aligncenter" title="tag cloud" src="{{ site.baseurl }}/assets/800px-Web_2.0_Map.svg.png" alt="" width="800" height="600" /></p>
+<p>The issue I had is that some of my blog posts are referred to the Fedora Project and they don't have nothing to do with Mozilla. That's why I had to separate and aggregate/push my Fedora related post to Fedora planet and my Mozilla related to Reps planet.</p>
+<p>All my blog posts had the proper tagging and have been categorized in different categories. So after some search the solution was quite obvious.</p>
+<p>The RSS feed for a selected tag - mozilla for example - is:</p>
+<pre>http://www.bacharakis.com/?tag=mozilla&amp;feed=rss2</pre>
+<p>If I want to provide blog posts based on the category is could be like this:</p>
+<pre>http://bacharakis.com/category/mozilla/feed</pre>
+<p>Simple enough, right? There are more <a href="http://codex.wordpress.org/WordPress_Feeds">hacks in this link.</a></p>
+<p>So you can now provide as much feeds as you like based on the tags without worrying about messing blog posts in different aggregators.</p>
+<p>&nbsp;</p>
