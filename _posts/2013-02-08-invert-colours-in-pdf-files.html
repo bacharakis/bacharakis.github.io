@@ -1,0 +1,57 @@
+---
+layout: post
+title: Invert colours in PDF files
+date: 2013-02-08 02:09:22.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Blog
+- Tips
+tags:
+- black
+- color
+- colours
+- convert
+- gray
+- invert
+- linux
+- pdf
+- tool
+- transform
+- white
+meta:
+  _publicize_pending: '1'
+  _edit_last: '3069145'
+  _designfolio_column_layout: default
+  _designfolio_hide_title_header_tag: ''
+  _designfolio_column_layout_save: ''
+  _designfolio_portfolio_group: ''
+  _designfolio_portfolio_columns: ''
+  original_post_id: '564'
+  _wp_old_slug: '564'
+author:
+  login: christosbacharakis
+  email: christos@bacharakis.com
+  display_name: Christos Bacharakis
+  first_name: Christos
+  last_name: Bacharakis
+permalink: "/2013/02/08/invert-colours-in-pdf-files/"
+---
+<p><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"><br />
+<html><body></p>
+<p>Today I faced to following problem.</p>
+<p>I wanted to print an ugly presentation which was stored in a PDF file. And I say ugly because the background was bright blue and the font of the text, yellow!</p>
+<p>Printing this beauty in a printer will definitely empty all the ink in the first 10 pages. That's why we have to invert the colours in order to consume less ink in printing.</p>
+<p>After an hour of searching on the web I came out with empty hands! I have only managed to apply a Gray scale on the PDF using the convert command:</p>
+<blockquote><p>convert uglyPresentation.pdf -colorspace gray prettierPresentation.pdf</p></blockquote>
+<p>I am still having the same problem. The background instead of the ugly bright blue is ugly black/gray.</p>
+<p>So I started reading the man page of the <a href="http://linux.die.net/man/1/convert">convert</a> tool instead of searching on the web. Finally I came up with the -negate argument which replace each pixel with its complementary color.</p>
+<blockquote><p>convert prettierPresentation.pdf -negate beautifulPresentation.pdf</p></blockquote>
+<p>And we are set! Now I can print my presentation consuming less ink!</p>
+<blockquote><p><strong>Conclusion: Read The F*** Manual</strong></p></blockquote>
+<p>It is also well mentioned that you can invert or change the colorspace in other file types, like images.</p>
+<p> </p>
+<p> </body></html></p>

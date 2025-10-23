@@ -1,0 +1,98 @@
+---
+layout: post
+title: Running multiple containers mapped in different domains – the discourse example
+date: 2015-11-02 15:59:30.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Blog
+- Projects
+tags:
+- containers
+- discourse
+- docker
+- domains
+- mapping
+- multiple
+- nginx
+meta:
+  _edit_last: '3069145'
+  geo_public: '0'
+  _publicize_job_id: '24375318746'
+  _last_editor_used_jetpack: block-editor
+  _thumbnail_id: '792'
+  wordads_ufa: s:wpcom-ufa-v3-beta:1680028625
+author:
+  login: christosbacharakis
+  email: christos@bacharakis.com
+  display_name: Christos Bacharakis
+  first_name: Christos
+  last_name: Bacharakis
+permalink: "/2015/11/02/running-multiple-containers-mapped-in-different-domains-the-discourse-example/"
+---
+<p><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"><br />
+<html><body></p>
+<h1></h1>
+<p> </p>
+<div>
+<p><strong><em>“Do you want to have multiple <span class="il">docker</span> containers in one server running different services, all mapped in different domain names and discourse to be one of them?”</em></strong></p>
+<h2>The idea</h2>
+<p>This is another blog post coming directly from<a href="http://techministry.gr/" target="_blank"> TechMinistry, Thessaloniki’s local hackerspace</a>.</p>
+<p>It’s the time of the year where we are brainstorming about the redesign of our website. We want to add some visibility in our hackerspace’s activities and promote participation within the city’s online community.</p>
+<p>So we decided to give <a href="http://www.discourse.org/" target="_blank">Discourse</a> a try to in order to explore all of its features and especially its API.</p>
+<p>Unfortunately we didn’t have a spare server to host it so we had to install it in a new <span class="il">docker</span> container since our website already exist in another one.</p>
+<p> </p>
+<h2>The problem</h2>
+<p>Our problem was how to test discourse while there was another <span class="il">docker</span> container listening to the same port, 80.</p>
+<p>Hint: “nginx reverse proxy”.</p>
+<p>After a lot of “<a href="http://duckduckgo.com/" target="_blank">ducking</a>” we found that you can set up an nginx reverse proxy server outside the 2 containers in order to handle the requests.</p>
+<h2>Configuring NGINX</h2>
+<p>In your server (NOT in any of the containers) you need to create a configuration file and put it inside <strong>/etc/nginx/conf.d </strong>.</p>
+<blockquote><p><strong>sudo nano /etc/nginx/conf.d/default.conf</strong></p></blockquote>
+<p>The file name doesn’t really matter but inside the it you need to paste <a href="https://github.com/techministry/website-dockerfile/blob/master/nginx-default.conf" target="_blank">the contents of this file</a>.</p>
+<p>As you can see in the configuration file, there are two different “apps” (you can change their names if you like) which each one is pointing to a different port in the localhost.</p>
+<blockquote><p>upstream app-a {<br />
+server <a href="http://127.0.0.1:2121" target="_blank">127.0.0.1:2121</a>;<br />
+}</p>
+<p>upstream app-b {<br />
+server <a href="http://127.0.0.1:2020" target="_blank">127.0.0.1:2020</a>;<br />
+}</p></blockquote>
+<p>Nginx will forward traffic to these ports, depending on which app you are trying to access.</p>
+<blockquote><p>server {<br />
+server_name <a href="http://techministry.gr" target="_blank">techministry.gr</a> <a href="http://www.techministry.gr" target="_blank">www.techministry.gr</a>;</p>
+<p>location / {<br />
+proxy_pass         <a href="http://app-a" target="_blank">http://app-a</a>;<br />
+proxy_redirect     off;<br />
+proxy_set_header   Host $host;<br />
+proxy_set_header   X-Real-IP $remote_addr;<br />
+proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;<br />
+proxy_set_header   X-Forwarded-Host $server_name;</p>
+<p>}<br />
+}</p></blockquote>
+<p>At this part we are making clear to nginx that the requests for the <a href="http://techministry.gr" target="_blank">techministry.gr</a> URL belong to the app-a and should be forwarded to the relevant port. The same for the other app.</p>
+<p>Now we only need to update the nginx process and start the containers. In order for these changes to take affect without restarting nginx you can use the following command:</p>
+<blockquote><p><strong>sudo nginx -s reload</strong></p></blockquote>
+<p> </p>
+<h2>Configuring a simple <span class="il">docker</span> container</h2>
+<p>Let’s run the website container:</p>
+<blockquote><p><strong><span class="il">docker</span> run –name website -p 2121:80 -t -i -d techministry</strong></p></blockquote>
+<p>Now the website container will forward the traffic that receives from external port 2121 to internal port 80.</p>
+<h2>Configuring Discourse for the nginx reverse proxy</h2>
+<p>For making a similar configuration for the discourse container we will need to edit it’s configuration file. We are assuming that you have already followed the <a href="https://github.com/discourse/discourse/blob/master/docs/INSTALL-cloud.md" target="_blank">Discourse installation guide</a> and you are ready to launch it. Before launching it you need to go back to the app.yml file and change the EXPOSE port to 2020.</p>
+<blockquote><p>nano containers/app.yml</p></blockquote>
+<p>and change the “<em>## which TCP/IP ports should this container expose?</em>” line to:</p>
+<blockquote><p>expose:<br />
+– “2020:80″   # fwd host port 80   to container port 80 (http)<br />
+– “2222:22″ # fwd host port 2222 to container port 22 (ssh)</p></blockquote>
+<p>Then you follow the <a href="https://github.com/discourse/discourse/blob/master/docs/INSTALL-cloud.md#bootstrap-discourse" target="_blank">discourse installation guide for building the image and running it</a>.</p>
+<p>When the installation is complete and the container is up and running you can visit your fresh discourse installation by simply accessing the domain name you reserved in the nginx configuration file which in that case is <a href="http://betatechministry.gr" target="_blank">http://betatechministry.gr</a>.</p>
+<p>You can also access the container using your server’s IP followed by the container port – in that case <a href="http://78.155.69.90:2020" target="_blank">78.155.69.90:2020</a>.</p>
+<h2>Conclusion</h2>
+<p>Following this technique you can have multiple <span class="il">docker</span> containers running different services, all mapped in different domain names.<br />
+Pretty awesome, right?</p>
+<p><strong>I want to give a special credit  to my friend and TechMinistry’s member <a href="https://github.com/alexdor" target="_blank">Alexandros</a> who dedicated a lot of his free time for this.</strong></p>
+</div>
+<p></body></html></p>

@@ -1,0 +1,52 @@
+---
+layout: post
+title: Network access issue with OpenWRT and Linksys NSLU2
+date: 2012-08-02 15:36:57.000000000 +02:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Blog
+- Projects
+tags:
+- dns
+- gateway
+- ip
+- issue
+- network
+- nslu2
+- openwrt
+- problem
+meta:
+  _publicize_pending: '1'
+  _edit_last: '3069145'
+  wpsd_autopost: '1'
+  original_post_id: '423'
+  _wp_old_slug: '423'
+author:
+  login: christosbacharakis
+  email: christos@bacharakis.com
+  display_name: Christos Bacharakis
+  first_name: Christos
+  last_name: Bacharakis
+permalink: "/2012/08/02/network-access-issue-with-openwrt-and-linksys-nslu2/"
+---
+<p><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"><br />
+<html><body>
+<p>Yesterday I remembered that I have a <a href="http://homesupport.cisco.com/en-us/wireless/lbc/nslu2">Linksys NSLU2</a> device somewhere forgotten in a box.</p>
+<p>Linksys NSLU2 is small Linux device which connects USB hard drives with the network transforming them in to network drives. It comes with a simple Linksys' firmware for performing only basic operations and changing some options. Although the device has an ARMv7 CPU which supports a lot of Linux ARM operating systems such as Debian and OpenWRT. You can explorer all the available operating systems available for NSLU2 at <a href="http://www.nslu2-linux.org/">NSLU2-Linux's home page</a>.<img class="alignleft" title="nslu2" src="{{site.baseurl}}/assets/img/2012/08/nslu.gif" alt="" width="165" height="132"></p>
+<p>My idea was to use NSLU2 as a simple home samba server nothing more nothing less. That's why I choose to install OpenWRT <a href="http://www.nslu2-linux.org/wiki/OpenWrt/HomePage">(installation guide available here)</a> which is light with an operational web interface where you can perform almost every administration operation you want.</p>
+<p>After OpenWRT installation I faced two problems:</p>
+<p>1. Couldn't locate the device's IP</p>
+<p>2. The device didn't has DNS</p>
+<p>The first problem was really easy to solve. OpenWRT is a small Linux operating system mainly for routers. That's why after the installation, OpenWRT has a static IP which is 192.168.1.1 which is the most common IP address for routers.</p>
+<p>Now, if you try to plug the OpenWRT device in the network where there is another device or router present with the same IP (192.168.1.1), then you have a problem. You have to change your device's IP and let the OpenWRT device take 192.168.1.1.</p>
+<p> </p>
+<p>The second problem was a little bit tricky. In the first time I thought that the NSLU2 didn't have internet connections because I couldn't event ping outside the network. Through OpenWRT's web interface I visited the Network-&gt;Interfaces-&gt;Lan page where I was able to add the network's gateway where for me is 192.168.1.1 (my router's address). Unfortunately my problem was still the same. Suddenly I realized that I couldn't ping because there wasn't a DNS server.</p>
+<p>Through Network-&gt;Interfaces-&gt;Lan page I added a DNS server field with the value 192.168.1.1. That's right, I added my router's IP address for DNS Server. Every other IP I tried to add was breaking down my DHCP server.</p>
+<p> </p>
+<p>Now I have a fully operational NSLU2 device with OpenWRT installed!</p>
+<p>Enjoy :)</p>
+<p></body></html></p>

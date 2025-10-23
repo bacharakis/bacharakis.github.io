@@ -1,0 +1,81 @@
+---
+layout: post
+title: Testing
+date:
+type: post
+parent_id: '0'
+published: false
+password: codebender
+status: draft
+categories: []
+tags: []
+meta:
+  _edit_last: '3069145'
+  _designfolio_column_layout: default
+  _designfolio_hide_title_header_tag: ''
+  _designfolio_column_layout_save: ''
+  _designfolio_portfolio_group: ''
+  _designfolio_portfolio_columns: ''
+  original_post_id: '685'
+  _wp_old_slug: '685'
+author:
+  login: christosbacharakis
+  email: christos@bacharakis.com
+  display_name: Christos Bacharakis
+  first_name: Christos
+  last_name: Bacharakis
+permalink: "/"
+---
+<p><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"><br />
+<html><body></p>
+<p dir="ltr">There are moments in a maker’s life where you are really happy about a new discovery! Something where you can make amazing stuff with! This “something” was that time the <a href="http://learn.microview.io/">MicroView board</a>.</p>
+<p dir="ltr">The MicroView is the first chip-sized Arduino compatible that lets you see what your Arduino is thinking using a built-in OLED display.</p>
+<p dir="ltr">The project joined the kickstarter platform the early of 2014 and by April it managed to pledge around half a million dollars.</p>
+<p><a href="http://www.bacharakis.com/?attachment_id=697" rel="attachment wp-att-697"><img class="aligncenter size-full wp-image-697" title="photo-main" src="{{site.baseurl}}/assets/img/photo-main.jpg" alt="" width="640" height="480"></a></p>
+<p dir="ltr">The moment I hold it in my hands I started thinking on what I could make with it. I checked the kickstarter page where there was a list with possible makes such as Clock, Weather, CPU Status, Car Temperature / Fuel levels etc. I found most of them not really interesting while your MicroView should be attached to your computer in most of that cases (CPU Status, Weather etc) in order to retrieve the information.</p>
+<p dir="ltr">I wanted something fun, fresh and challenging which will take advantage of the MicroView’s OLED display. That’s why I came up with the idea of making a MicroView dice.</p>
+<p dir="ltr">The most challenging part was to design and draw each side of a dice.</p>
+<p dir="ltr">So how do you draw the dice’s side with number 1? You simply draw a small circle in the middle of the screen and you fill it with color.</p>
+<p dir="ltr">How about drawing number 2? Two small circles, one on the top right and one on the bottom left. How about number 3,4,5 and 6? It’s all about drawing small circles and placing them on your screen!</p>
+<p dir="ltr">Fortunately the MicroView team had developed a <a href="https://codebender.cc/libraries#collapseMicroView">library</a> which includes functions for drawing lines, circles, squares and etc. Let’s see it in action:</p>
+<blockquote><p> </p>
+<p dir="ltr">uView.rect(8,0,48,48);</p>
+</blockquote>
+<p dir="ltr">This function draws a rectangular sized 48x48 pixel and puts it in position 8,0. This is actually a square frame which gives us the sense of the frame of a dice.</p>
+<p> </p>
+<blockquote>
+<p dir="ltr">uView.circleFill(32,24,4);</p>
+</blockquote>
+<p dir="ltr">This function is for drawing a circle filled with color which is positioned at 32,24 pixel and has 4 pixel width.</p>
+<p dir="ltr">Now along with the uView.display(); function we have the side numbered 1 ready to be displayed on our MicroView code. Below you can find the complete code on Codebender which you can easily upload on your board by clicking “Run on Arduino”. If you don’t have an account on Codebender please <a href="https://codebender.cc/register/">sign up</a> first and setup your account by completing the <a href="https://codebender.cc/static/walkthrough/page/1">getting started guide</a>.</p>
+<p><a href="https://codebender.cc/embed/sketch:41179">https://codebender.cc/embed/sketch:41179</a></p>
+<p dir="ltr">As you can see there are two more statements in the setup area in our code(line 10-11). The “<strong>begin</strong>” function which initialize the MicroView and the “<strong>clear(PAGE)</strong>” which clears the memory of the board.</p>
+<p dir="ltr">Let’s say that we found a way to successfully draw each side of the dice. How are we going to make it roll and randomly present a number?</p>
+<p dir="ltr">The rolling process can be implemented by presenting sides of the dice randomly and fast. In order to do that we are going to put all the dice’s sides we have drawn in a switch-case statement. Along with a “random” function we are going to decide every time, which side we will print.</p>
+<p dir="ltr"> For example if the random function returns 1 we are going to print the side numbered 1. If the function returns the number 5 we are going to print the side numbered 5. That’s why we want the range of the random number to be from 1 till 7 (the last number is excluded by the function’s definition on Arduino). Let’s see it in action:</p>
+<p><a href="https://codebender.cc/embed/sketch:41189">https://codebender.cc/embed/sketch:41189</a></p>
+<p id="docs-internal-guid-7c2a207b-8d3b-a435-a02a-d20aef3362d0" dir="ltr">As you can see, we have declared a function named “<strong>dice</strong>” (line 15) with an argument which is the desired side of the dice we want to print. Inside the function there is a switch-case where depend on the value of the argument prints the desired side/number.</p>
+<p dir="ltr">In the main section of our program we have initialized a for loop where in every loop we call the “<strong>dice</strong>” function with a random number from 1-6 as a parameter. This will achieve the feeling of a rolling dice. The <strong>for loop</strong> is going to be repeated “length” times, where length is a variable with values from 1 to 19. You can change the range of the for loop by changing the random function in line 67.</p>
+<p><a href="http://www.bacharakis.com/?attachment_id=691" rel="attachment wp-att-691"><img class="aligncenter  wp-image-691" title="IMG_1209" src="{{site.baseurl}}/assets/img/IMG_1209.jpg" alt="" width="619" height="412"></a></p>
+<p dir="ltr">Our dice is now ready! But wait a minute, I thought that the meaning of a dice was to hold it in your hands, shake it and throw it on the ground. But how we are going to do that with the MicroView?</p>
+<p dir="ltr"> We are going to use a couple of hardware parts in order to achieve it. First we will need 2 button batteries for the power supply, an accelerator analog sensor and the proper cables for connecting everything together.</p>
+<p dir="ltr"> Parts:</p>
+<p dir="ltr"><a href="http://www.sportys.com/source/images/products/large/10828.jpg">2 cell button batteries </a>ora pack with 2 cell button batteries<br />
+- <a href="http://www.instructables.com/id/Button-cell-battery-pack-for-experiments-or-small-/">Instructions on how to create a cell button battery pack on your own</a></p>
+<p dir="ltr">Analog Accelerator sensor</p>
+<p dir="ltr"><a href="http://cloud2.lbox.me/images/384x384/201211/1-pin-female-to-female-dupont-cables-for-arduino-2-x-40-pcs-21cm_yjlabh1353647772499.jpg">Female cables</a></p>
+<p> </p>
+<p dir="ltr">The plus (+)/red cable of the battery pack is going to be connected on the <strong>Vin</strong> pin on the Microview and the other cable to the <strong>ground</strong>.</p>
+<p dir="ltr">On the accelerator, we have to connect the longest out of the 2 pins on the pin numbered <strong>A0</strong> on the MicroView board.</p>
+<p dir="ltr">Please see the image below as a reference:</p>
+<p dir="ltr">IMAGE WITH detailed CONNECTIONS</p>
+<p dir="ltr">With the analog accelerator connected on pin <strong>A0</strong> we have to change our code in order to make it interact with the sensor. When the sensor is on upper position and not moving the value it returns is 0. When the value of the sensor is not 0 that means that the dice is rolling so the screen has to change. Let’s see it in action:</p>
+<p><a href="https://codebender.cc/embed/sketch:36616">https://codebender.cc/embed/sketch:36616</a></p>
+<p dir="ltr">On line 4 we initialize the pin where the sensor is connected and on line 5 we initialize a variable for storing the sensor’s value. In our sketch's main loop first we get the value from the sensor (line 74) and then we print the first random dice side (line 76).</p>
+<p dir="ltr">Next we initialize a while loop in order to print random dice sides when the sensor’s value is not 0. Pretty simple, right?</p>
+<p dir="ltr">But how we are going to shake it in our hands and roll the MicroView on the ground? I have asked for my friend’s Nick help who designed a plastic shield where I can put the MicroView and the parts in it.</p>
+<p dir="ltr">You can find the design on the following link, print it, put your MicroView and parts in it and voila!</p>
+<p dir="ltr"><a href="http://www.bacharakis.com/?attachment_id=692" rel="attachment wp-att-692"><img class="aligncenter  wp-image-692" title="IMG_1229" src="{{site.baseurl}}/assets/img/IMG_1229.jpg" alt="" width="682" height="454"></a></p>
+<p dir="ltr">You are now ready to play your favorite board game with the help of the MicroView!</p>
+<p dir="ltr">Enjoy</p>
+<p></body></html></p>
