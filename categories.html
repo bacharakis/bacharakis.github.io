@@ -1,0 +1,31 @@
+---
+layout: page
+title: Categories
+permalink: /categories/
+---
+
+<div class="category-cloud">
+  {% assign sorted_categories = site.categories | sort %}
+  {% for category in sorted_categories %}
+    <span class="category-item">
+      <a href="#{{ category[0] | slugify }}" class="category-link">{{ category[0] }}</a>
+      <span class="category-count">({{ category[1].size }})</span>
+    </span>
+  {% endfor %}
+</div>
+
+<div class="category-sections">
+  {% for category in sorted_categories %}
+    <section id="{{ category[0] | slugify }}" class="category-section">
+      <h2>{{ category[0] }} <span class="category-count">({{ category[1].size }})</span></h2>
+      <ul class="posts-list">
+        {% for post in category[1] %}
+          <li>
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+</div>
