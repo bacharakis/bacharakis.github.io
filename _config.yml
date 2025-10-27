@@ -85,34 +85,39 @@ pageviews:
 #
 # Available options:
 #
-#   light — Use the light color scheme
-#   dark — Use the dark color scheme
+#     light — Use the light color scheme
+#     dark — Use the dark color scheme
 #
 theme_mode: # [light | dark]
 
-# The CDN endpoint for media resources.
+# The CDN endpoint for images.
 # Notice that once it is assigned, the CDN url
-# will be added to all media resources (site avatar, posts' images, audio and video files) paths starting with '/'
+# will be added to all image (site avatar & posts' images) paths starting with '/'
 #
-# E.g. 'https://cdn.com'
-cdn:
+# e.g. 'https://cdn.com'
+img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-# avatar:
+avatar:
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
-social_preview_image: # string, local or CORS resources
+seo:
+  image:
+  image_alt:
+  twitter:
+    card: summary
+    creator:
 
 # boolean type, the global switch for TOC in posts.
 toc: true
 
 comments:
-  # Global switch for the post-comment system. Keeping it empty means disabled.
+  # Global switch for the post comment system. Keeping it empty means disabled.
   provider: # [disqus | utterances | giscus]
   # The provider options are as follows:
   disqus:
-    shortname: # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+    shortname: # fill in the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
   # utterances settings › https://utteranc.es/
   utterances:
     repo: # <gh-username>/<repo>
@@ -145,7 +150,7 @@ pwa:
     # Usually its value is the `baseurl` of another website that
     # shares the same domain name as the current website.
     deny_paths:
-      # - "/example"  # URLs match `<SITE_URL>/example/*` will not be cached by the PWA
+      # - "/example"  # URLs match `<site_url>/example/*` will not be cached by the PWA
 
 paginate: 10
 
@@ -155,7 +160,7 @@ baseurl: ""
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:
-  footnote_backlink: "&#8617;&#xfe0e;"
+  footnote_backlink: "↩︎"
   syntax_highlighter: rouge
   syntax_highlighter_opts: # Rouge Options › https://github.com/jneen/rouge#full-options
     css_class: highlight
@@ -217,8 +222,10 @@ exclude:
   - "package*.json"
 
 jekyll-archives:
-  enabled: [categories]
+  enabled: [categories, tags]
   layouts:
     category: category
+    tag: tag
   permalinks:
     category: /categories/:name/
+    tag: /tags/:name/
