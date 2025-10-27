@@ -18,7 +18,8 @@ title: Christos Bacharakis # the main title
 
 tagline: Technologist, Nature lover, Coffee nerd, Basketball fan and proud dog dad. # it will display as the subtitle
 
-description: >- # used by seo meta and the atom feed
+description: >
+- # used by seo meta and the atom feed
   My personal space where I share thoughts about tech, open source, travel, coffee and whatever I have in my mind.
 
 # Fill in the protocol & hostname for your site.
@@ -88,7 +89,7 @@ pageviews:
 #     light — Use the light color scheme
 #     dark — Use the dark color scheme
 #
-theme_mode: light # [light | dark]
+theme_mode: # [light | dark]
 
 # The CDN endpoint for media resources.
 # Notice that once it is assigned, the CDN url
@@ -97,8 +98,7 @@ theme_mode: light # [light | dark]
 # e.g. 'https://cdn.com'
 cdn:
 
-# the avatar on sidebar, support local or CORS resources
-avatar: "/assets/img/avatar.jpg"
+avatar: assets/profile.png
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
@@ -108,7 +108,7 @@ social_preview_image: # string, local or CORS resources
 toc: true
 
 comments:
-  # Global switch for the post-comment system. Keeping it empty means disabled.
+  # Global switch for the post comment system. Keeping it empty means disabled.
   provider: # [disqus | utterances | giscus]
   # The provider options are as follows:
   disqus:
@@ -138,14 +138,12 @@ assets:
     env: # [development | production]
 
 pwa:
-  enabled: true # The option for PWA feature (installable)
-  cache:
-    enabled: true # The option for PWA offline cache
-    # Paths defined here will be excluded from the PWA cache.
-    # Usually its value is the `baseurl` of another website that
-    # shares the same domain name as the current website.
-    deny_paths:
-      # - "/example"  # URLs match `<SITE_URL>/example/*` will not be cached by the PWA
+  enabled: true # The option for PWA offline cache
+  # Paths defined here will be excluded from the PWA cache.
+  # Usually its value is the `baseurl` of another website that
+  # shares the same domain name as the current website.
+  deny_paths:
+    # - "/example"  # URLs match `<site_url>/example/*` will not be cached by the PWA
 
 paginate: 10
 
@@ -155,7 +153,7 @@ baseurl: ""
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:
-  footnote_backlink: "&#8617;&#xfe0e;"
+  footnote_backlink: "↩︎"
   syntax_highlighter: rouge
   syntax_highlighter_opts: # Rouge Options › https://github.com/jneen/rouge#full-options
     css_class: highlight
@@ -217,10 +215,8 @@ exclude:
   - "package*.json"
 
 jekyll-archives:
-  enabled: [categories, tags]
+  enabled: [categories]
   layouts:
     category: category
-    tag: tag
   permalinks:
-    tag: /tags/:name/
     category: /categories/:name/
