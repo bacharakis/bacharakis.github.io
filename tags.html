@@ -4,4 +4,28 @@ title: Tags
 permalink: /tags/
 ---
 
-{% for tag in site.tags %}<li><a href="/tags/{{ tag[0] }}/">{{ tag[0] }} ({{ tag[1].size }})</a></li>{% endfor %}
+<div class="tag-cloud">
+  {% assign sorted_tags = site.tags | sort %}
+  {% for tag in sorted_tags %}
+    <span class="tag-item">
+      <a href="#{{ tag[0] | slugify }}" class="tag-link">{{ tag[0] }}</a>
+      <span class="tag-count">({{ tag[1].size }})</span>
+    </span>
+  {% endfor %}
+</div>
+
+<div class="tag-sections">
+  {% for tag in sorted_tags %}
+    <section id="{{ tag[0] | slugify }}" class="tag-section">
+      <h2>{{ tag[0] }} <span class="tag-count">({{ tag[1].size }})</span></h2>
+      <ul class="posts-list">
+        {% for post in tag[1] %}
+          <li>
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+</div>
