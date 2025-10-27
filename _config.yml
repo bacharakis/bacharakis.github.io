@@ -85,8 +85,8 @@ pageviews:
 #
 # Available options:
 #
-#     light — Use the light color scheme
-#     dark — Use the dark color scheme
+#   light — Use the light color scheme
+#   dark — Use the dark color scheme
 #
 theme_mode: # [light | dark]
 
@@ -94,10 +94,11 @@ theme_mode: # [light | dark]
 # Notice that once it is assigned, the CDN url
 # will be added to all media resources (site avatar, posts' images, audio and video files) paths starting with '/'
 #
-# e.g. 'https://cdn.com'
+# E.g. 'https://cdn.com'
 cdn:
 
-avatar: assets/profile.png
+# the avatar on sidebar, support local or CORS resources
+# avatar:
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
@@ -107,7 +108,7 @@ social_preview_image: # string, local or CORS resources
 toc: true
 
 comments:
-  # Global switch for the post comment system. Keeping it empty means disabled.
+  # Global switch for the post-comment system. Keeping it empty means disabled.
   provider: # [disqus | utterances | giscus]
   # The provider options are as follows:
   disqus:
@@ -137,12 +138,14 @@ assets:
     env: # [development | production]
 
 pwa:
-  enabled: true # The option for PWA offline cache
-  # Paths defined here will be excluded from the PWA cache.
-  # Usually its value is the `baseurl` of another website that
-  # shares the same domain name as the current website.
-  deny_paths:
-    # - "/example"  # URLs match `<site_url>/example/*` will not be cached by the PWA
+  enabled: true # the option for PWA feature (installable)
+  cache:
+    enabled: true # the option for PWA offline cache
+    # Paths defined here will be excluded from the PWA cache.
+    # Usually its value is the `baseurl` of another website that
+    # shares the same domain name as the current website.
+    deny_paths:
+      # - "/example"  # URLs match `<SITE_URL>/example/*` will not be cached by the PWA
 
 paginate: 10
 
@@ -152,7 +155,7 @@ baseurl: ""
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:
-  footnote_backlink: "↩︎"
+  footnote_backlink: "&#8617;&#xfe0e;"
   syntax_highlighter: rouge
   syntax_highlighter_opts: # Rouge Options › https://github.com/jneen/rouge#full-options
     css_class: highlight
