@@ -29,10 +29,10 @@ author:
   last_name: Bacharakis
 permalink: "/2009/06/22/making-a-fedora-11-usb-installation-stick/"
 ---
-<p><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"><br />
+<p><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "https://www.w3.org/TR/REC-html40/loose.dtd"><br />
 <html><body>
 <p>Recently I bought a brand new laptop with no optical drive onboard. The obvious way to install Fedora 11 was throught a Fedora 11 Live USB Stick which i had to create. Althought I wanted a fully customized clean install and the only way to do that is thgough a Fedora 11 Installation DVD. So, I had to create a Fedora 11 Installation USB Stick.</p>
-<p>After a google search I came up with the following <a href="http://forums.fedoraforum.org/showthread.php?t=205596">link</a> of "how to  install Fedora 11 DVD from a 4GB USB stick". I am pasting the steps with some small corrections.</p>
+<p>After a google search I came up with the following <a href="https://forums.fedoraforum.org/showthread.php?t=205596">link</a> of "how to  install Fedora 11 DVD from a 4GB USB stick". I am pasting the steps with some small corrections.</p>
 <p>What you will need: a USB stick with 4GB minimum capacity, a Fedora 11 DVD image file and livecd-tools.</p>
 <p><span style="font-weight:bold;"># yum install -y livecd-tools</span><br style="font-weight:bold;"><br style="font-weight:bold;"><span style="font-weight:bold;"># mkdir /media/iso</span><br style="font-weight:bold;"><span style="font-weight:bold;"># livecd-iso-to-disk --reset-mbr &lt;path to&gt;/Fedora-11-i386-DVD.iso  /dev/sdb1</span><br style="font-weight:bold;"><br style="font-weight:bold;"><span style="font-weight:bold;"># mkdir /media/&lt;usb disk&gt;/images</span><br style="font-weight:bold;"><span style="font-weight:bold;"># mount -o loop &lt;path to&gt;/Fedora-11-i386-DVD.iso /media/iso</span><br style="font-weight:bold;"><span style="font-weight:bold;"># cp /media/iso/images/install.img  /media/&lt;usb disk&gt;/images/</span><br style="font-weight:bold;"><span style="font-weight:bold;"># cp &lt;path to&gt;/Fedora-11-i386-DVD.iso /media/&lt;usb disk&gt;/<br />
 </span></p>

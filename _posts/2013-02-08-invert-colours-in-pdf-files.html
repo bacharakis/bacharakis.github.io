@@ -40,7 +40,7 @@ author:
   last_name: Bacharakis
 permalink: "/2013/02/08/invert-colours-in-pdf-files/"
 ---
-<p><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"><br />
+<p><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "https://www.w3.org/TR/REC-html40/loose.dtd"><br />
 <html><body></p>
 <p>Today I faced to following problem.</p>
 <p>I wanted to print an ugly presentation which was stored in a PDF file. And I say ugly because the background was bright blue and the font of the text, yellow!</p>
@@ -48,7 +48,7 @@ permalink: "/2013/02/08/invert-colours-in-pdf-files/"
 <p>After an hour of searching on the web I came out with empty hands! I have only managed to apply a Gray scale on the PDF using the convert command:</p>
 <blockquote><p>convert uglyPresentation.pdf -colorspace gray prettierPresentation.pdf</p></blockquote>
 <p>I am still having the same problem. The background instead of the ugly bright blue is ugly black/gray.</p>
-<p>So I started reading the man page of the <a href="http://linux.die.net/man/1/convert">convert</a> tool instead of searching on the web. Finally I came up with the -negate argument which replace each pixel with its complementary color.</p>
+<p>So I started reading the man page of the <a href="https://linux.die.net/man/1/convert">convert</a> tool instead of searching on the web. Finally I came up with the -negate argument which replace each pixel with its complementary color.</p>
 <blockquote><p>convert prettierPresentation.pdf -negate beautifulPresentation.pdf</p></blockquote>
 <p>And we are set! Now I can print my presentation consuming less ink!</p>
 <blockquote><p><strong>Conclusion: Read The F*** Manual</strong></p></blockquote>
