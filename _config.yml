@@ -8,41 +8,41 @@ theme: jekyll-theme-chirpy
 # otherwise, the layout language will use the default value of 'en'.
 lang: en
 
-# Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
+# Change to your timezone › https://zones.arilyn.cc
 timezone:
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Christos Bacharakis # the main title
+title: Chirpy # the main title
 
-tagline: Technologist, Nature lover, Coffee nerd, Basketball fan and proud dog dad. # it will display as the subtitle
+tagline: A text-focused Jekyll theme # it will display as the subtitle
 
-description: >
-  My personal space where I share thoughts about tech, open source, travel, coffee and whatever I have in my mind.
+description: >- # used by seo meta and the atom feed
+  A minimal, responsive and feature-rich Jekyll theme for technical writing.
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
 url: ""
 
 github:
-  username: bacharakis # change to your GitHub username
+  username: github_username # change to your GitHub username
 
 twitter:
-  username: bacharakis # change to your Twitter username
+  username: twitter_username # change to your Twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: Christos Bacharakis
-  email: christos@bacharakis.com # change to your email address
+  name: your_full_name
+  email: example@domain.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/bacharakis # change to your Twitter homepage
-    - https://github.com/bacharakis # change to your GitHub homepage
+    - https://twitter.com/username # change to your Twitter homepage
+    - https://github.com/username # change to your GitHub homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    - https://www.linkedin.com/in/christosbacharakis
+    # - https://www.linkedin.com/in/username
 
 # Site Verification Settings
 webmaster_verifications:
@@ -90,34 +90,29 @@ pageviews:
 #
 theme_mode: # [light | dark]
 
-# The CDN endpoint for images.
+# The CDN endpoint for media resources.
 # Notice that once it is assigned, the CDN url
-# will be added to all image (site avatar & posts' images) paths starting with '/'
+# will be added to all media resources (site avatar, posts' images, audio and video files) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn:
+cdn:
 
 # the avatar on sidebar, support local or CORS resources
 avatar:
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
-seo:
-  image:
-  image_alt:
-  twitter:
-    card: summary
-    creator:
+social_preview_image: # string, local or CORS resources
 
 # boolean type, the global switch for TOC in posts.
 toc: true
 
 comments:
-  # Global switch for the post comment system. Keeping it empty means disabled.
+  # Global switch for the post-comment system. Keeping it empty means disabled.
   provider: # [disqus | utterances | giscus]
   # The provider options are as follows:
   disqus:
-    shortname: # fill in the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+    shortname: # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
   # utterances settings › https://utteranc.es/
   utterances:
     repo: # <gh-username>/<repo>
@@ -143,14 +138,14 @@ assets:
     env: # [development | production]
 
 pwa:
-  enabled: true # the option for PWA feature (installable)
+  enabled: true # The option for PWA feature (installable)
   cache:
-    enabled: true # the option for PWA offline cache
+    enabled: true # The option for PWA offline cache
     # Paths defined here will be excluded from the PWA cache.
     # Usually its value is the `baseurl` of another website that
     # shares the same domain name as the current website.
     deny_paths:
-      # - "/example"  # URLs match `<site_url>/example/*` will not be cached by the PWA
+      # - "/example"  # URLs match `<SITE_URL>/example/*` will not be cached by the PWA
 
 paginate: 10
 
@@ -160,7 +155,7 @@ baseurl: ""
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:
-  footnote_backlink: "↩︎"
+  footnote_backlink: "&#8617;&#xfe0e;"
   syntax_highlighter: rouge
   syntax_highlighter_opts: # Rouge Options › https://github.com/jneen/rouge#full-options
     css_class: highlight
@@ -227,5 +222,5 @@ jekyll-archives:
     category: category
     tag: tag
   permalinks:
-    category: /categories/:name/
     tag: /tags/:name/
+    category: /categories/:name/
