@@ -20,7 +20,7 @@ Key files and directories
 ## Editing rules & patterns to follow
 
 - When adding posts: copy the front matter pattern from existing files in `_posts/`. Example: `permalink: "/2020/04/08/zero-inbox/"` or omit and rely on default `/posts/:title/`.
-- Use `{{ site.baseurl }}` for asset paths inside posts (existing posts use `{{site.baseurl}}/assets/img/...`).
+- Use `{{ site.baseurl }}` for asset paths inside posts (existing posts use `/assets/img/...`).
 - Keep posts' HTML content structure consistent with existing exported WordPress HTML (you can edit the HTML), but prefer lightweight Markdown where possible — ensure front matter `layout: post` remains.
 - If you change CSS, templates, or theme-related files, be aware the theme is provided by the `jekyll-theme-chirpy` gem. Theme files are not all in this repo; the README documents which theme files may be copied in.
 
@@ -46,7 +46,7 @@ Key files and directories
 - Run the full production build & checks locally before pushing:
   - `./tools/test.sh`
 - Asset reference inside a post (example found in `_posts/2020-04-08-zero-inbox.html`):
-  - `<img src="{{site.baseurl}}/assets/img/2020/04/zero-inbox1.png">`
+  - `<img src="/assets/img/2020/04/zero-inbox1.png">`
 
 ## Safety & constraints for automated changes
 
